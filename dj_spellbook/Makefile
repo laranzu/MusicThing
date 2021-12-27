@@ -5,12 +5,16 @@
 
 default: app
 
-app: resfile
+app: resources
 
 clean:
 	rm __pycache__/*
 	rm qrc_resources.py
 
-resfile: resources/icon128x128.png
+RESFILES = \
+	resources/icon128x128.png	\
+	resources/about.html		\
+
+resources: $(RESFILES)
 	pyrcc5 resources/resources.qrc -o ./qrc_resources.py
 

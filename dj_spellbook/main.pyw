@@ -24,12 +24,12 @@ class AppWindow(QMainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("DJ Spellbook " + __version__)
+        self.setWindowTitle(self.tr("DJ Spellbook") + " " + __version__)
         self.initDisplay()
         self.initStatus()
         self.initMenus()
         self.restoreSettings()
-        self.statusBar().showMessage("Ready")
+        self.statusBar().showMessage(self.tr("Ready"))
 
     def initDisplay(self):
         """Display widget for main window"""
@@ -62,13 +62,17 @@ class AppWindow(QMainWindow):
     def initMenus(self):
         """Just the file menu with a few actions"""
         fileMenu = self.menuBar().addMenu("File")
-        doAbout = self.createAction("About...", self.showAbout, "Ctrl+A", "About this application")
-        doExit = self.createAction("Exit", self.close, QKeySequence.Quit, "End application")
+        doAbout = self.createAction(self.tr("About..."), self.showAbout, "Ctrl+A",
+                        self.tr("About this application"))
+        doExit = self.createAction(self.tr("Exit"), self.close, QKeySequence.Quit,
+                        self.tr("End application"))
         fileMenu.addAction(doAbout)
         fileMenu.addSeparator()
         fileMenu.addAction(doExit)
 
     ##  Application state between runs
+
+    # Strings are keys into file, so don't i18n
 
     def restoreSettings(self):
         """Reload window geometry"""
@@ -95,16 +99,14 @@ class AppWindow(QMainWindow):
 
     def showAbout(self):
         """Guilty parties"""
-        # The about box can use simple HTML
-        # (Not having /p tags is deliberate)
-        QMessageBox.about(self, "About This Application",
-            """
-            <b>DJ Spellbook</b>
-            <p>DJ expert: Paul Wayper
-            <p>Code mangler: Hugh Fisher
-            <p>Written in Python with PyQt
-            """
-            )
+        # Load text from file so can do i18n
+        htmlFile = QFile(":/about.html")
+        if htmlFile.open(QIODevice.ReadOnly | QIODevice.Text):
+            content = QTextStream(htmlFile).readAll()
+            htmlFile.close()
+        else:
+            raise IOError("Cannot open about.html file from resources")
+        QMessageBox.about(self, self.tr("About This Application"), content)
 
 
     ##  Shutting down
@@ -120,6 +122,15 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setOrganizationName("EvilAliensInc")
     app.setApplicationName("DJ_Spellbook")
+    #  i18n setup, framework and app-specific
+    locale = QLocale.system().name()
+    qtTranslation = QTranslator()
+    if qtTranslation.load("qt_" + locale, ":/"):
+        app.installTranslator(qtTranslation)
+    appTranslation = QTranslator()
+    if appTranslation.load("dj_spellbook_" + locale, ":/"):
+        app.installTranslator(appTranslation)
+    #
     app.setWindowIcon(QIcon(":/icon.png"))
     win = AppWindow()
     win.show()
