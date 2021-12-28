@@ -2,5 +2,6 @@
 <qresource>
 <file alias="icon.png">icon128x128.png</file>
 <file alias="about.html">about.html</file>
+<file>../translations/spellbook_fr.qm</file>
 </qresource>
 </RCC>

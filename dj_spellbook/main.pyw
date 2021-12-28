@@ -61,7 +61,7 @@ class AppWindow(QMainWindow):
 
     def initMenus(self):
         """Just the file menu with a few actions"""
-        fileMenu = self.menuBar().addMenu("File")
+        fileMenu = self.menuBar().addMenu(self.tr("File"))
         doAbout = self.createAction(self.tr("About..."), self.showAbout, "Ctrl+A",
                         self.tr("About this application"))
         doExit = self.createAction(self.tr("Exit"), self.close, QKeySequence.Quit,
@@ -106,7 +106,7 @@ class AppWindow(QMainWindow):
             htmlFile.close()
         else:
             raise IOError("Cannot open about.html file from resources")
-        QMessageBox.about(self, self.tr("About This Application"), content)
+        QMessageBox.about(self, self.tr("About this application"), content)
 
 
     ##  Shutting down
@@ -122,14 +122,20 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setOrganizationName("EvilAliensInc")
     app.setApplicationName("DJ_Spellbook")
-    #  i18n setup, framework and app-specific
+    #  i18n setup...
     locale = QLocale.system().name()
+    # Use system Qt for built in widgets
     qtTranslation = QTranslator()
-    if qtTranslation.load("qt_" + locale, ":/"):
+    if qtTranslation.load("qt_" + locale, QLibraryInfo.location(QLibraryInfo.TranslationsPath)):
         app.installTranslator(qtTranslation)
+    else:
+        print("ERR could not load Qt translation for {}".format(locale))
+    # App-specific translation in resource file
     appTranslation = QTranslator()
-    if appTranslation.load("spellbook_" + locale, ":/"):
+    if appTranslation.load("spellbook_" + locale, ":/translations"):
         app.installTranslator(appTranslation)
+    else:
+        print("Application has not been translated for {}".format(locale))
     #
     app.setWindowIcon(QIcon(":/icon.png"))
     win = AppWindow()

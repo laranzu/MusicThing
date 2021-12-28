@@ -5,37 +5,37 @@
     <message>
         <location filename="../main.pyw" line="27"/>
         <source>DJ Spellbook</source>
-        <translation type="unfinished"></translation>
+        <translation>DJ sortilèges</translation>
     </message>
     <message>
         <location filename="../main.pyw" line="32"/>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Prêt</translation>
     </message>
     <message>
         <location filename="../main.pyw" line="65"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>À propos...</translation>
     </message>
     <message>
-        <location filename="../main.pyw" line="65"/>
+        <location filename="../main.pyw" line="109"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>À propos de ce programme</translation>
     </message>
     <message>
         <location filename="../main.pyw" line="67"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <location filename="../main.pyw" line="67"/>
         <source>End application</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter l&apos;application</translation>
     </message>
     <message>
-        <location filename="../main.pyw" line="109"/>
-        <source>About This Application</source>
-        <translation type="unfinished"></translation>
+        <location filename="../main.pyw" line="64"/>
+        <source>File</source>
+        <translation>Fichier</translation>
     </message>
 </context>
 </TS>
