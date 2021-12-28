@@ -128,7 +128,7 @@ if __name__ == "__main__":
     if qtTranslation.load("qt_" + locale, ":/"):
         app.installTranslator(qtTranslation)
     appTranslation = QTranslator()
-    if appTranslation.load("dj_spellbook_" + locale, ":/"):
+    if appTranslation.load("spellbook_" + locale, ":/"):
         app.installTranslator(appTranslation)
     #
     app.setWindowIcon(QIcon(":/icon.png"))
