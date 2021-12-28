@@ -1,2 +1,4 @@
 __pycache__/
-translations/*.qm
+*.qm
+qrc_resources.py
+

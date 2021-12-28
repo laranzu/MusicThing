@@ -34,3 +34,5 @@ Run from the terminal, Old School:
 Even though this is a Python program, there are build steps,
 to create Qt resource and i18n files. So also needs package(s):
     qt5-linguist
+    qt5-qttranslations
+    
