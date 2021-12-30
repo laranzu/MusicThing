@@ -132,6 +132,8 @@ if __name__ == "__main__":
     appTranslation = QTranslator()
     if appTranslation.load("spellbook_" + locale, ":/translations"):
         app.installTranslator(appTranslation)
+    elif locale.startswith("en_"):
+        pass # App is written in English. Aus/UK, but Americans can cope
     else:
         print("Application has not been translated for {}".format(locale))
     #
